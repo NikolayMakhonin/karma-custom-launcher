@@ -1,7 +1,6 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][github-image]][github-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
 
 # Usage
 
@@ -125,5 +124,3 @@ module.exports = function (config) {
 [downloads-url]: https://npmjs.org/package/@flemist/karma-custom-launcher
 [github-image]: https://github.com/NikolayMakhonin/karma-custom-launcher/actions/workflows/test.yml/badge.svg
 [github-url]: https://github.com/NikolayMakhonin/karma-custom-launcher/actions
-[coveralls-image]: https://coveralls.io/repos/github/NikolayMakhonin/karma-custom-launcher/badge.svg
-[coveralls-url]: https://coveralls.io/github/NikolayMakhonin/karma-custom-launcher
