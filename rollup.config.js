@@ -10,9 +10,7 @@ import json from '@rollup/plugin-json'
 import polyfills from 'rollup-plugin-node-polyfills'
 import inject from '@rollup/plugin-inject'
 import babel from '@rollup/plugin-babel'
-import nycrc from './nyc.config.mjs'
-import { terser } from 'rollup-plugin-terser'
-import path from "path"
+import path from 'path'
 import pkg from './package.json'
 
 const dev = !!process.env.ROLLUP_WATCH
@@ -43,7 +41,7 @@ const onwarnRollup = (warning, onwarn) => {
     ]
       .map(o => o?.toString()?.trim())
       .filter(o => o)
-      .join('\r\n') + '\r\n'
+      .join('\r\n') + '\r\n',
   )
 
   return false
@@ -52,8 +50,8 @@ const onwarnRollup = (warning, onwarn) => {
 const aliasOptions = {
   entries: [
     {
-      find: 'src',
-      replacement: path.resolve(__dirname, 'src')
+      find       : 'src',
+      replacement: path.resolve(__dirname, 'src'),
     },
   ],
 }
@@ -61,15 +59,15 @@ const aliasOptions = {
 const nodeConfig = {
   cache: true,
   input: [
-    'src/**/*.ts'
+    'src/**/*.ts',
   ],
   output: {
-    dir: 'dist/node',
-    format: 'cjs',
-    exports: 'named',
-    entryFileNames: `[name].cjs`,
+    dir           : 'dist/node',
+    format        : 'cjs',
+    exports       : 'named',
+    entryFileNames: '[name].cjs',
     chunkFileNames: '[name].cjs',
-    sourcemap: dev,
+    sourcemap     : dev,
   },
   plugins: [
     del({ targets: 'dist/node/*' }),
@@ -87,7 +85,7 @@ const nodeConfig = {
       sourceMap: dev,
     }),
   ],
-  onwarn: onwarnRollup,
+  onwarn  : onwarnRollup,
   external: Object.keys(pkg.dependencies)
     .concat(Object.keys(pkg.devDependencies))
     .concat(require('module').builtinModules || Object.keys(process.binding('natives'))),
@@ -98,12 +96,12 @@ const browserTestsConfig = {
   input: [
     'src/helpers/test/show-useragent.ts',
     'src/helpers/test/register.ts',
-    'src/**/*.test.ts'
+    'src/**/*.test.ts',
   ],
   output: {
-    dir: 'dist/browser',
-    format: 'iife',
-    exports: 'named',
+    dir      : 'dist/browser',
+    format   : 'iife',
+    exports  : 'named',
     sourcemap: 'inline',
   },
   plugins: [
@@ -117,18 +115,18 @@ const browserTestsConfig = {
       preventAssignment: true,
     }),
     resolve({
-      browser: true,
+      browser       : true,
       preferBuiltins: false,
     }),
     commonjs({
       transformMixedEsModules: true,
     }),
     inject({
-      global: require.resolve('rollup-plugin-node-polyfills/polyfills/global.js')
+      global: require.resolve('rollup-plugin-node-polyfills/polyfills/global.js'),
     }),
     polyfills(),
     typescript({
-      sourceMap: true,
+      sourceMap      : true,
       compilerOptions: {
         target: 'es5',
       },

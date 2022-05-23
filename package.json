@@ -2,8 +2,8 @@
   "name": "@flemist/karma-custom-launcher",
   "version": "0.0.0",
   "description": "Custom launcher for karma",
-  "main": "dist/index.cjs",
-  "types": "dist/index.d.ts",
+  "main": "dist/node/index.cjs",
+  "types": "dist/node/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NikolayMakhonin/karma-custom-launcher.git"
@@ -22,8 +22,7 @@
     "access": "public"
   },
   "scripts": {
-    "install:yarn": "yarn install",
-    "prepublishOnly": "yarn build && yarn run test:ci",
+    "prepublishOnly": "yarn build && yarn run test:mocha:ci && yarn run test:karma",
     "lint": "eslint \"./src/**/*.{ts,js,cjs,mjs}\"",
     "lint:fix": "eslint --fix \"./src/**/*.{ts,js,cjs,mjs}\"",
     "build:js": "rollup -c && cpy \"**/assets/**\" \"../dist/\" --parents --cwd=src",
